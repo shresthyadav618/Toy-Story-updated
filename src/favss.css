@@ -1,0 +1,19 @@
+
+.favss{
+    color: white;
+    column-gap: 20px;
+}
+
+.favss {
+color: red;
+font-size: x-large;
+font-weight: bolder;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+margin-bottom: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.mainfav > *{
+    flex : 1 1 180px;
+}

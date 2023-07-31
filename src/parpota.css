@@ -1,0 +1,49 @@
+.displayopen{
+    width: 100%;
+    height: 100vh;
+   position: fixed;
+   top: 0;
+   left: 0;
+   color: black;
+}
+.subopen{
+    position: relative;
+    width: 70%;
+    margin: 0 auto;
+    height: auto;
+    background-color: grey;
+    margin-top: 160px;
+    padding: 20px;
+    border: 1px solid rgb(255, 255, 255);
+    overflow: auto;
+    transition: 0.5s all ease-in-out;
+}
+.sub-left img{
+    width: 60%;
+}
+.sub-left-parent{
+    /* height: 100%; */
+}
+.sub-left{
+    width: 100%;
+}
+.sub-right{
+    width: 100%;
+    
+ 
+}
+.sub-right-child{
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+}
+.xx{
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+}
+.sub-right-child > div{
+    display: block;
+    width: fit-content;
+    margin: 10px auto;
+}
