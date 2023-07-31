@@ -51,6 +51,7 @@ export default function useDetailed(){
         getData();
         getCast();
         getRec();
+        console.log('changes in this');
     },[])
    if(!detail || !cast || !rec){
     return <Loader/>;
