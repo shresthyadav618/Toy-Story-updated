@@ -1,0 +1,136 @@
+.first__container > img{
+    max-width: 90%;
+    box-shadow: 0.5em 0.5em 1em;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.first__container{
+    width: 30%;
+    margin-left: 40px;
+}
+.second__container{
+    width: 60%;
+}
+.po{
+    height: 80px;
+}
+.castt__name{
+    margin-top: 10%;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 3.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.00833em;
+}
+.miracle1{
+    width: 20%;
+    max-width: 220px;
+    border-right: 1px solid white;
+    display: block;
+    overflow-y: scroll;
+    height: 110vh;
+    overflow-block: clip;
+    z-index: 1100;
+    background-color: white;
+    display: block;
+}
+.btn__blue__only{
+    color: rgb(25, 118, 210);
+}
+.cast__bd{
+    margin: 0px 0px 0.35em;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.334;
+    letter-spacing: 0em;
+}
+.cast__bio{
+    margin: 0px 0px 16px;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+    text-align: justify;
+}
+.cast__movies{
+    margin-top: 40px;
+}
+.btn__blue{
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 118, 210);
+    min-width: 64px;
+    padding: 6px 16px;
+}
+.top__container{
+    /* flex w-full mt-8 gap-x-4 */
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    column-gap: 20px;
+}
+
+.main__movies{
+    display: flex;
+    flex-wrap: wrap;
+}
+.main__movies > a{
+    width: 16%;
+}
+
+
+.shikra{
+    width: 100%;
+}
+
+@media screen and (max-width : 1350px){
+    .main__movies > a{
+        width: 25%;
+    }
+}
+
+@media screen and (max-width : 1200px){
+    .shikra{
+        width: 80%;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width : 1080px){
+    .top__container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .first__container{
+        width: 80%;
+    }
+    .second__container{
+        width: 80%;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .main__movies > a{
+        width: 33.3%;
+    }
+    .second__container > div{
+        width: 90%;
+    }
+    }
+    @media screen and (max-width : 950px){
+        .miracle1{
+            width: 30%;
+        }
+    }
+    /* @media screen and (max-width : 1000px){
+    .main__movies > a{
+        width: 33%;
+    }
+    } */
+@media screen and (max-width : 900px){
+    .main__movies > a{
+        width: 50%;
+    }
+}

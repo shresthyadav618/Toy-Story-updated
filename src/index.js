@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Cast from "./cast/cast";
 import Detailed from "./detailed/detailed";
 import './index.css';
 import Sider from "./sider.js";
@@ -11,10 +12,14 @@ root.render(
   
   <BrowserRouter>
   <div className='flex'>
+    {/* <img src='./assets/12.png'></img> */}
     <Routes>
   
-    <Route path='/' element={<div className='sider'><Sider/></div>}></Route>
+    <Route path='/' element={<> <div className='miracle'></div> <Sider/></>}></Route>
+    <Route path='/:id' element={<Sider/>}></Route>
     <Route path='/movie/:id' element={<Detailed/>}></Route>
+    <Route path='/movies/:id' element={<Detailed/>}></Route>
+    <Route path='/cast/:id' element={<Cast/>}></Route>
  
     </Routes>
 

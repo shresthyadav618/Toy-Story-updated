@@ -1,29 +1,46 @@
-import React, { useEffect, useState } from "react";
-import logo from "./assets/movielogo.jpeg";
-
 import { collection, getDocs, onSnapshot } from "firebase/firestore";
-import { Link, Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Routes, useNavigate, useParams } from "react-router-dom";
 import Child from "./Child";
-import a2f from "./assets/a2f.jpeg";
-import action from "./assets/action.png";
-import advent from "./assets/advent.png";
-import animation from "./assets/animation.png";
-import comedy from "./assets/comedy.png";
-import crime from "./assets/crime.png";
-import documentary from "./assets/documentary.png";
-import drama from "./assets/drama.png";
-import family from "./assets/family.png";
-import fiction from "./assets/fiction.png";
-import horror from "./assets/horror.png";
-import Favss from "./favss";
+import logo from "./assets/movielogo.jpeg";
 import firestore from "./firestore";
 import "./index.css";
 import Links from "./links";
-export default function useSider() {
+import Navbar from "./navbar/navbar";
+export default function useSider(props) {
+  const API_KEY = '?api_key=6973771bf60a7b1add0cc2ef3779046c';
   const colref=collection(firestore,'movies')
 
 const [gci,gcc]=useState(false)  // gcc -> grand child change , gci -> grand child initial
+const [genres, getGenres] = useState(null);
+const[sidebarRefresh,changeSidebarRefresh] = useState(false);
+const [urlUsed, ChangeUrl] = React.useState(null);
+if(urlUsed)
+console.log(urlUsed.url);
+const [allow,changeAllow] = useState(false);
+const Navigate = useNavigate();
+const {id} = useParams();
+console.log(id)
+useEffect(()=>{
+  if(id){
+    if(id==69){
+      ChangeUrl({ url: Links.popular, check: true });
+    }else if(id==6969){
+      ChangeUrl({ url: Links.toprated, check: true });
+    }else if(id==696969){
+      ChangeUrl({ url: Links.upcoming, check: true });
+    }else{
+    ChangeUrl({ url: `https://api.themoviedb.org/3/discover/movie${API_KEY}&with_genres=${id}`, check: false });
+    }
+  }
+  const options = {method: 'GET', headers: {accept: 'application/json'}};
+  fetch(`https://api.themoviedb.org/3/genre/movie/list${API_KEY}`, options)
+    .then(response => response.json())
+    .then(response => getGenres(response.genres))
+    .catch(err => console.error(err));
 
+},[]);
+console.log('got the genres' , genres)
 function maingcc(){
   gcc((prev)=>{
     return !prev
@@ -31,7 +48,7 @@ function maingcc(){
   // console.log("lund lele")
 }
 
-  const [urlUsed, ChangeUrl] = React.useState();
+
   const [favs,changefav]=useState([])
 useEffect(()=>{
 let arr=[];
@@ -57,9 +74,9 @@ onSnapshot(colref,((snap)=>{
 // onSnapshot use hoga , aur agr onsnapshot mai state change kre to infinite loop bn jayga 
 
 
-  console.log(Links);
+  // console.log(Links);
   console.log(urlUsed);
-  console.log(Links.toprated);
+  // console.log(Links.toprated);
 
 const [fav,tgl]=useState(false);
 
@@ -67,8 +84,13 @@ const [fav,tgl]=useState(false);
 
   return (
     <>
+    <Navbar/>
+    {/* <div className="miracle"></div> */}
       <div className="flex">
-        <div className="sider cursor-pointer">
+        {/* write the code of the sidebar first */}
+        <div className="flex">
+      
+        <div className="sider cursor-pointer ">
 
 
 
@@ -76,14 +98,145 @@ const [fav,tgl]=useState(false);
             <img src={logo} alt="not found" width={"100px"}></img>
           </div>
 <div className="br"></div>
-          <div className="flex justify-center items-center text-lg" onClick={()=>{tgl((prev)=>!prev)}}>
+          {/* <div className="flex justify-center items-center text-lg" onClick={()=>{tgl((prev)=>!prev)}}>
           <Link to="/fav"><p>Your favourites</p></Link>
             <img src={a2f} width="20px" className="ml-2"></img>
-          </div>
+          </div> */}
 
           <div className="br"></div>
           <div className="spec">Categories</div>
+          
           <div className="allelm">
+
+          <div
+              className="myanchor"
+              onClick={() => {
+                ChangeUrl({ url: Links.popular, check: true });
+                if(props.filter){
+                  Navigate('/69');
+                  changeAllow(true)
+                }
+                
+              }}
+            >
+              <div className="df">
+                <div className="mimg">
+                  <i class="fa-solid fa-fire fa-xl"></i>
+                </div>
+                <li> Popular</li>
+              </div>
+            </div>
+            <div
+              className="myanchor"
+              onClick={() => {
+                ChangeUrl({ url: Links.toprated, check: true });
+                if(props.filter){
+                  Navigate('/6969');
+                  changeAllow(true)
+                }
+               
+              }}
+            >
+              <div className="df">
+                <div className="mimg">
+                  <i class="fa-regular fa-star fa-xl"></i>
+                </div>
+                <li> Top Rated</li>
+              </div>
+            </div>
+            <div
+              href=""
+              className="myanchor"
+              onClick={() => {
+               
+                ChangeUrl({ url: Links.upcoming, check: true });
+                if(props.filter){
+                  Navigate('/696969');
+                  changeAllow(true)
+                }
+              }}
+            >
+              <div className="df">
+                <div className="mimg">
+                  <i class="fa-solid fa-bolt fa-xl"></i>
+                </div>
+                <li> Upcoming</li>
+              </div>
+            </div>
+
+            <div className="br"></div>
+         
+          <div className="spec">Genres</div>
+
+            {genres && genres.map((elm)=>{
+              // console.log(`./assets/${elm.id}.png`);
+              const pathImage = require(`./assets/${elm.id}.png`);
+              // console.log(pathImage);
+              return(
+                
+                <div
+                className="myanchor"
+                onClick={() => {
+                  ChangeUrl({ url: `https://api.themoviedb.org/3/discover/movie${API_KEY}&with_genres=${elm.id}`, check: false });
+                 
+                  if(props.filter){
+                    Navigate(`/${elm.id}`);
+                    // ChangeUrl({ url: `https://api.themoviedb.org/3/discover/movie${API_KEY}&with_genres=${elm.id}`, check: false });
+                    changeAllow(true)
+                  }
+                }}
+              >
+                <div className="df">
+                  <div className="mimg">
+                    <img src={pathImage} alt="notfound" width="30px"></img>
+                  </div>
+                  {elm.name}
+                </div>
+              </div>
+              )
+
+
+              
+            })}
+          </div>
+          {/* //   trending action documentaries comedy horror */}
+        </div>
+        <div className="bgc"></div>
+        <div className="newbgc"></div>
+      
+
+
+      </div>
+
+      {props.filter===undefined || props.filter && allow? <div>
+  <Routes>
+{/* <Route path="/fav" element={<Favss fav={favs} Gcc={maingcc}/>}>
+
+</Route> */}
+</Routes>
+<br></br>
+<div className="wl"></div>
+    <Child
+      GetUrl={urlUsed === null ? Links.popular : urlUsed.url}
+      Check={urlUsed === null ? true : urlUsed.check}
+      Gcc={maingcc}
+    />
+  </div> : ''}
+
+      </div> 
+      {/* div end */}
+      
+    </>
+  );
+}
+
+
+
+
+
+
+
+{/* <div className="allelm">
             <div
               className="myanchor"
               onClick={() => {
@@ -257,28 +410,4 @@ const [fav,tgl]=useState(false);
                 Ficton
               </div>
             </div>
-          </div>
-          {/* //   trending action documentaries comedy horror */}
-        </div>
-
-        <div className="bgc"></div>
-        <div>
-        <Routes>
-  <Route path="/fav" element={<Favss fav={favs} Gcc={maingcc}/>}>
- 
-  </Route>
-</Routes>
-    <br></br>
-   <div className="wl"></div>
-          <Child
-            GetUrl={urlUsed === undefined ? Links.popular : urlUsed.url}
-            Check={urlUsed === undefined ? true : urlUsed.check}
-            Gcc={maingcc}
-          />
-        </div>
-
-
-      </div>
-    </>
-  );
-}
+          </div> */}

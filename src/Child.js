@@ -42,7 +42,7 @@ export default function useFetchh(props) {
   });
 
   return (
-    <div className="container">
+    <div className="container1">
       <div className="flex flex-wrap op">{xx}</div>
 
       <div className="m-auto flex newdiv">

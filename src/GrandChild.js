@@ -31,9 +31,10 @@ addDoc(colref, {
 props.Gcc()
 }
 
+const string = props.path_diff && true ? '/movies/' : '/movie/';
 
  return (<>
- <Link to={`/movie/`+props.MovieId}>
+ <Link to={`${string}`+props.MovieId}>
  <div >
     <div className="con flex flex-col " >
             <div className=""><img
@@ -46,7 +47,7 @@ props.Gcc()
             </div>
         
           </div>
-          <div className="block m-auto w-56">
+          <div className="block m-auto w-56 ninty">
             <h1 className="block m-auto w-fit text-center">{props.MovieTitle}</h1>
               
             </div>
