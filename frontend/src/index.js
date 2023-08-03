@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Cast from "./cast/cast";
 import Detailed from "./detailed/detailed";
+import HandleUser from "./handleUser/handleUser";
 import './index.css';
 import Sider from "./sider.js";
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -20,7 +21,7 @@ root.render(
     <Route path='/movie/:id' element={<Detailed/>}></Route>
     <Route path='/movies/:id' element={<Detailed/>}></Route>
     <Route path='/cast/:id' element={<Cast/>}></Route>
- 
+    <Route path='/user/' element={<HandleUser/>}></Route>
     </Routes>
 
 

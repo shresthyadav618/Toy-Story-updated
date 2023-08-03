@@ -19,3 +19,37 @@
     min-height: 64px;
 
 }
+.toggle{
+position: absolute;
+left: 20%;
+top: 30%;
+}
+
+.movie__input{
+    position: absolute;
+    top: 30%;
+    display: flex;
+    column-gap: 0px;
+    color: white;
+    
+    left: 50%;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid white;
+}
+.movie__input > form > input{
+    width: 100%;
+    background: none;
+    height: 10px;
+    padding: 10px;
+}
+.movie__input > form > input:focus{
+    outline: none;
+}
+.user__heart{
+    position: absolute;
+    top: 30%;
+    right: 10%;
+    display: flex;
+    column-gap: 10px;
+}
