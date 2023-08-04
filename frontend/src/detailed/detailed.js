@@ -20,6 +20,8 @@ export default function useDetailed(){
     const[genres,changeGenres] = useState(null);
     const Navigate = useNavigate();
     const [loader,setLoader] = useState(true);
+    const [checkFav,changeCheckFav] = useState(null);
+    const [favid,changeFavId] = useState(null);
     const {id} = useParams();
     console.log(id);
     const API_KEY = '?api_key=6973771bf60a7b1add0cc2ef3779046c';
@@ -66,13 +68,68 @@ export default function useDetailed(){
         console.log('changes in this');
     },[id]);
 
-    
+    useEffect(()=>{
+        async function checkforFav(){
+        
+          const data = await fetch('http://localhost:8000/def/fav/check',{
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({'movie_id' : id})
+        });
+
+        if(data.ok){
+            const res = await data.json();
+
+            console.log('movie exists in the fav movie database',res);
+        }else{
+             addMovie();
+            console.log('the movie doesnt exist in movie fav database ',data.error);
+        }
+
+        }
+
+
+        async function addMovie(){
+            const data = await fetch('http://localhost:8000/def/fav',{
+                method : 'POST',
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify({'movie_id' : id})
+            });
+
+            if(data.ok){
+                const res = await data.json();
+                console.log('the movie is added to the database',res);
+                changeCheckFav(true);
+            }else{
+                console.log('some error adding the movie ot favorites',data.error);
+            }
+        }
+        checkforFav();
+    },[favid])
     if(detail && cast && rec && loader){
         setLoader(false);
     }
     var imgPath = null;
     
-    
+    async function deleteFromFav(){
+        const data = await fetch('http://localhost:8000/def/fav/delete',{
+            method : 'POST',
+            headers : {'Content-Type' : 'application/json'},
+            body : JSON.stringify({'movie_id':id})
+        });
+
+        if(data.ok){
+            const res = await data.json();
+            console.log('success deleting the movie from database',res);
+            changeCheckFav(false);
+        }else{
+            console.log('there was some error deleting the movie',data.error);
+        }
+    }
 
    if(loader){
     return <Loader/>;
@@ -176,11 +233,21 @@ export default function useDetailed(){
 
                                 </div>
                                 <div className='second__link'>
-
-                                <div className='btn1'>
+                                    { !checkFav && 
+                                <div className='btn1' onClick={()=>{
+                                    changeFavId(id);
+                                }}>
                                         <span>FAVORITE</span>
                                         <FontAwesomeIcon icon={faHeart} />
                                     </div>
+   }
+
+   {checkFav && <div className='btn1' onClick={()=>{
+                                    deleteFromFav();
+                                }}>
+                                        <span>UNFAVORITE</span>
+                                        <FontAwesomeIcon icon={faHeart} />
+                                    </div>}
 
                                     <div className='btn1'>
                                         <span>WATCHLIST</span>

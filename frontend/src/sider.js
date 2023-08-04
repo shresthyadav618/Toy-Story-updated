@@ -80,11 +80,15 @@ onSnapshot(colref,((snap)=>{
 
 const [fav,tgl]=useState(false);
 
-
-
+const [query,setQuery] = useState(null);
+useEffect(()=>{
+if(query){
+  ChangeUrl({url:`https://api.themoviedb.org/3/search/movie${API_KEY}&query=${query}`})
+}
+},[query])
   return (
     <>
-    <Navbar/>
+    <Navbar setQuery={setQuery}/>
     {/* <div className="miracle"></div> */}
       <div className="flex">
         {/* write the code of the sidebar first */}
@@ -209,6 +213,7 @@ const [fav,tgl]=useState(false);
       </div>
 
       {props.filter===undefined || props.filter && allow? <div>
+        {console.log(urlUsed)}
   <Routes>
 {/* <Route path="/fav" element={<Favss fav={favs} Gcc={maingcc}/>}>
 

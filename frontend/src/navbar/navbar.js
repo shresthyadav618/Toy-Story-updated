@@ -4,8 +4,10 @@ import "./navbar.css";
 import { faBell, faHeart, faLightbulb, faMagnifyingGlass, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from "react";
-export default function useNavbar(){
+export default function useNavbar(props){
 
+    
+    const [data,changeData] = useState(null);
     const [select,changeSelect] = useState(true);
     return(
         <div className="navbar relative">
@@ -37,8 +39,13 @@ export default function useNavbar(){
 
             <div className="movie__input">
             <FontAwesomeIcon icon={faMagnifyingGlass}/>
-            <form>
-            <input type="text" ></input>
+            <form onSubmit={(e)=>{
+                e.preventDefault();
+                props.setQuery(data);
+            }}>
+            <input type="text" onChange={(e)=>{
+                changeData(e.target.value);
+            }}></input>
             </form>
                 
             </div>
