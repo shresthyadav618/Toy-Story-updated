@@ -1,0 +1,157 @@
+
+.lr__parent{
+    column-gap: 60px;
+    padding: 40px;
+    height: 100%;
+}
+.container__left{
+    padding: 20px;
+    --tw-bg-opacity: 1;
+    /* background-color: rgb(11 15 41/var(--tw-bg-opacity)); */
+    background-color: #293241;
+    color: white;
+    border-radius: 10px;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.container__left > div >*{
+    padding: 10px;
+    column-gap: 10px;
+    border-radius: 10px;
+}
+.bglight{
+    --tw-bg-opacity: 1;
+    background-color: rgb(224 213 213/var(--tw-bg-opacity));
+    color: black;
+}
+
+.container__right{
+    color: white;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 40px;
+   border: 2px solid black;
+   width: 70%;
+   background-color: #293241;
+}
+
+.child__container > form > div{
+margin-bottom: 40px;
+row-gap: 5px;
+}
+.child__container > form > div > input{
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+}
+
+.large{
+padding: 20px;
+border: 1px solid black;
+border: 1px solid rgb(224 213 213/var(--tw-bg-opacity));
+--tw-bg-opacity: 1;
+border-radius: 10px;
+}
+.large > div{
+
+}
+.current__image > img{
+    object-fit: contain;
+    border-radius: 10px;
+}
+.btnclass > button{
+    padding: 15px;
+    font-size: large;
+    border: 1px solid red;
+    border-radius: 7px;
+}
+.bt1{
+    --tw-bg-opacity: 1;
+    background-color: rgb(242 0 0/var(--tw-bg-opacity));
+    color: white;
+}
+.bt1:hover{
+    background-color: #293241;
+}
+.bt2:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(242 0 0/var(--tw-bg-opacity));
+}
+.large{
+    position: relative;
+}
+.large > input{
+    width: 100%;
+    height: 100%;
+}
+input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .fmovie{
+    padding: 40px;
+    border: 2px solid white;
+    row-gap: 20px;
+  }
+  .child__container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+  }
+.current__image > img{
+    width: 100px;
+}
+.change__image > div{
+    align-items: center;
+}
+  @media screen and (max-width:1280px){
+    .lr__parent{
+        flex-direction: column;
+        row-gap: 60px;
+    }
+    .container__left{
+        width: 50%;
+    }
+    .container__right{
+        width: 100%;
+    }
+  }
+@media screen and (max-width:700px){
+    .container__right{
+        margin-bottom: 40px;
+    }
+    .lr__parent{
+        padding: 5px;
+    }
+    .large{
+        flex-direction: column;
+        row-gap: 20px!important;
+
+    }
+    .change__image > div{
+        text-align: left;
+        align-items: baseline;
+    }
+    .change__image > div > span{
+        text-align: left;
+    }
+    .current__image > img{
+        width: 60px;
+    }
+    .current__image{
+        /* margin: auto; */
+    }
+    .btnclass{
+        flex-direction: column;
+    }
+}
+
+  @media screen and (max-width: 560px){
+    .container__left{
+        width: 80%;
+    }
+  }

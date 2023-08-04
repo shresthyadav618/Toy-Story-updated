@@ -1,7 +1,70 @@
 import React, { useState } from 'react';
+import Header from "../navbar/navbar";
+import Sidebar from "../sider";
+import Loggeduser from "../userLogged/loggedUser";
 import "./handleUser.css";
 const HandleUser = () => {
   const [view, setView] = useState('login'); // Initial view is 'login'
+
+
+  const [sign,changeSign] = useState({
+    name : "",
+    email : "",
+    password : ""
+  });
+  const [login,changeLogin] = useState({
+    email : "",
+    password: ""
+  });
+
+  const [render,changeRender] = useState(false);
+function loginUser(e){
+e.preventDefault();
+
+async function loginFnc(){
+
+const data = await fetch('http://localhost:8000/def/login',{
+  method : 'POST',
+  body : JSON.stringify(login),
+  headers : {'Content-Type':'application/json'}  
+})
+
+if(data.ok){
+    const res = await data.json();
+    console.log('the user is logged in ',res);
+    sessionStorage.setItem('jwt',res.token);
+    changeRender((prev)=>{return !prev});
+}else{
+    console.log('there was some error while loggin in the user',data.error);
+}
+
+}
+
+loginFnc();
+
+}
+
+function signUpUser(e){
+    e.preventDefault();
+    async function suar(){
+        const data = await fetch('http://localhost:8000/def/signup',{
+            method  : 'POST',
+            headers : {'Content-Type' : 'application/json'},
+            body : JSON.stringify(sign)
+        });
+
+        if(data.ok){
+            const res = await data.json();
+            console.log('user is registered with info ',res);
+        }else{
+            console.log('there was some error while registering the user ',data.error);
+        }
+    }
+
+    suar();
+    alert('User is Signed Up');
+    setView('login');
+}
 
   const handleSignupClick = () => {
     setView('signup');
@@ -15,6 +78,20 @@ const HandleUser = () => {
     event.preventDefault();
     handleSignupClick();
   };
+
+  const jwt = sessionStorage.getItem('jwt');
+  if(jwt){
+    return (
+        <>
+        <Header/>
+        <Sidebar filter='true' />
+        <div className='logged__container'>
+            <Loggeduser value='0'/>
+        </div>
+        </>
+    )
+  }
+else{
 
   return (
     <div className='user__container'>
@@ -37,12 +114,18 @@ const HandleUser = () => {
         </div>
         <div className="form-inner">
           {view === 'login' && (
-            <form action="#" className="login">
+            <form onSubmit={(e)=>{
+                loginUser(e);
+            }} className="login">
               <div className="field">
-                <input type="text" placeholder="Email Address" required />
+                <input type="text" placeholder="Email Address" required onChange={(e)=>{
+                    changeLogin((prev)=>{return {...prev,email : e.target.value}})
+                }}/>
               </div>
               <div className="field">
-                <input type="password" placeholder="Password" required />
+                <input type="password" placeholder="Password" required onChange={(e)=>{
+                    changeLogin((prev)=>{return {...prev,password : e.target.value}})
+                }}/>
               </div>
               <div className="pass-link">
                 <a href="#">Forgot password?</a>
@@ -58,16 +141,24 @@ const HandleUser = () => {
           )}
 
           {view === 'signup' && (
-            <form action="#" className="signup">
+            <form onSubmit={(e)=>{
+                signUpUser(e);
+            }} className="signup">
                  <div className="field">
-                <input type="text" placeholder="Name" required />
+                <input type="text" placeholder="Name" required  onChange={(e)=>{
+                    changeSign((prev)=>{return {...prev,name : e.target.value}})
+                }}/>
               </div>
               
               <div className="field">
-                <input type="text" placeholder="Email Address" required />
+                <input type="text" placeholder="Email Address" required onChange={(e)=>{
+                    changeSign((prev)=>{return {...prev,email : e.target.value}})
+                }}/>
               </div>
               <div className="field">
-                <input type="password" placeholder="Password" required />
+                <input type="password" placeholder="Password" required onChange={(e)=>{
+                    changeSign((prev)=>{return {...prev,password : e.target.value}})
+                }}/>
               </div>
              
 
@@ -88,5 +179,6 @@ const HandleUser = () => {
     </div>
   );
 };
+}
 
 export default HandleUser;

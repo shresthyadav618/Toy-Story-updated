@@ -7,9 +7,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const jwt_secret = process.env.SECRET;
 const loginUser = (req,res)=>{
-    const {name,email,password} = req.body;
+    const {email,password} = req.body;
 
-    userModal.findOne({name,email}).then((result)=>{
+    userModal.findOne({email}).then((result)=>{
         if(result){
             const hashedPwd = result.password;
             bcrypt.compare(password, hashedPwd, function (err, isMatch) {

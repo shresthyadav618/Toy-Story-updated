@@ -258,3 +258,15 @@ align-items: center;
     }
     
 }
+
+@media screen and (max-width : 700px){
+ .first__main > img{
+    margin: auto;
+ }   
+ .miracle{
+    width: 0px;
+ }
+ .miracle1{
+    width: 0px;
+ }
+}

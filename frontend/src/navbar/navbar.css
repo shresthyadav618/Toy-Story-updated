@@ -21,7 +21,7 @@
 }
 .toggle{
 position: absolute;
-left: 20%;
+left: 35%;
 top: 30%;
 }
 
@@ -48,8 +48,46 @@ top: 30%;
 }
 .user__heart{
     position: absolute;
-    top: 30%;
-    right: 10%;
+    top: 31%;
+    right: 5%;
     display: flex;
     column-gap: 10px;
+}
+.hmb{
+    height: 2px;
+    width: 19px;
+    color: white;
+    background-color: white;
+}
+
+
+@media screen and (max-width : 700px){
+    .toggle{
+        left: 5%;
+    }
+    .hamburger{
+        position: absolute;
+        display: none;
+        top: 37%;
+        display: flex;
+        right: 1%;
+        flex-direction: column;
+        row-gap: 5px;
+    }
+    .movie__input{
+        left: 28%;
+        width: 200px;
+    }
+}
+
+@media screen and (max-width : 600px){
+    .user__heart{
+        right: 8%;
+    }
+}
+
+@media screen and (max-width : 430px){
+    .movie__input{
+        width: 140px;
+    }
 }

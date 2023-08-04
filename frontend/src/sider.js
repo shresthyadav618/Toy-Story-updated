@@ -90,7 +90,7 @@ const [fav,tgl]=useState(false);
         {/* write the code of the sidebar first */}
         <div className="flex">
       
-        <div className="sider cursor-pointer ">
+        <div className="sider cursor-pointer sider__extra">
 
 
 

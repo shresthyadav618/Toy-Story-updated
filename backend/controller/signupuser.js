@@ -2,7 +2,7 @@
 const userModal = require('../modals/user');
 const bcrypt = require('bcryptjs');
 const signUpUser = (req,res)=>{
-const {name,email,password,image} = req.body;
+const {name,email,password} = req.body;
 // console.log(req.body);
 var hashedPwd ;
 
@@ -27,7 +27,6 @@ bcrypt.genSalt(10, function (err, Salt) {
                     name : name,
                     email : email ,
                     password : hashedPwd,
-                    image : image
                     });
                     
                     user.save().then((result)=>{

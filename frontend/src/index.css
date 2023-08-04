@@ -97,17 +97,25 @@ code {
 
 .sider {
   width: 20%;
+  display: block;
   max-width: 220px;
   border-right: 1px solid white;
-  position: fixed;
+  
   overflow-y: scroll;
   height: 110vh;
   overflow-block: clip;
   z-index: 1200;
-  left: 0px;
+  
   background-color: white;
 }
-
+.sider__extra{
+  left: 0px;
+  position: fixed;
+  height: 100%;
+}
+.myanchor{
+  height: 80px;
+}
 /* Hide the default scrollbar */
 body {
   scrollbar-width: none; /* Firefox */
@@ -161,6 +169,7 @@ body {
 
 
 }
+
 .wl{
   height: 2px;
   width: 100%;
@@ -191,6 +200,12 @@ body {
   border: 2px solid red;
 }
 
+@media screen and (min-width:701px){
+  .sider{
+    display: block!important;
+  }
+}
+
 @media screen and (max-width : 950px){
   .sider{
     width: 30%;
@@ -207,3 +222,15 @@ body {
     margin-left: 30%;
   }
 }
+
+@media screen and (max-width : 700px){
+  .container1{
+    margin-left: 18%;
+    margin-top: 60px;
+  }
+  .sider{
+    max-width: 400px;
+    width: 50%;
+  }
+}
+
