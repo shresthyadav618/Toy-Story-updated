@@ -12,7 +12,7 @@ import './detailed.css';
 
 import { faTrailer } from "@fortawesome/free-solid-svg-icons";
 export default function useDetailed(){
-    
+   
     const[refresh,changeRefresh] = useState(false); 
     const [detail,changeDetail] = useState(null);
     const [cast,changeCast] = useState(null);
@@ -227,11 +227,14 @@ export default function useDetailed(){
                                     console.log(`https://image.tmdb.org/t/p/w500/${elm.profile_path}.jpg?api_key=6973771bf60a7b1add0cc2ef3779046c`);
                                     return(
                                         
-                                        <div className='cast__card' onClick={()=>{window.location.href=`/cast/${elm.id}?prev=${`/movie/${id}`}`}}>
+                                        <div onClick={()=>{
+                                            Navigate(`/cast/${elm.id}?prev=${`/movie/${id}`}`)
+                                        }} className='cast__card' >
                                             <img src={`https://image.tmdb.org/t/p/w500/${elm.profile_path}?api_key=6973771bf60a7b1add0cc2ef3779046c`} width={'100px'} height={'100px'}></img>
                                             <div className='cast__name'>{elm.original_name}</div>
                                             <div className='cast__role'>{elm.character.split('/')[0]}</div>
                                         </div>
+                                        
                                         
                                     )
                                     }
