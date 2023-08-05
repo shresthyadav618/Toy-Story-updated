@@ -10,7 +10,7 @@ export default function useNavbar(props){
     const [data,changeData] = useState(null);
     const [select,changeSelect] = useState(true);
     return(
-        <div className="navbar relative">
+        <div className="navbar">
 
             <div className="hamburger" onClick={()=>{
                 const el = document.querySelectorAll('.sider');
