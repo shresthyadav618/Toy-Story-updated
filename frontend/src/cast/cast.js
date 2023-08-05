@@ -2,7 +2,7 @@
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import GrandChild from "../GrandChild";
 import loader from "../loader/loader";
 import Sider from "../sider";
@@ -11,7 +11,7 @@ export default function useCast(){
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const prevParam = queryParams.get('prev');
- 
+ const Navigate = useNavigate();
     // Now you can use the `prevParam` variable in your component
     // For example, you can log it to the console:
     console.log('prev:', prevParam);
@@ -70,7 +70,7 @@ if(!details || !movie){
                             window.location.href = `https://www.imdb.com/name/${details.imdb_id}/`
                         }}>IMDB</button>
                         <button className="flex gap-x-1 justify-center items-center btn__blue__only" onClick={()=>{
-                            window.location.href = prevParam;
+                            Navigate(prevParam);
                         }}><FontAwesomeIcon icon={faArrowLeft} /> <span>BACK</span> </button>
                     </div>
                 </div>
