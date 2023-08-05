@@ -21,7 +21,7 @@ root.render(
     <Route path='/movie/:id' element={<Detailed/>}></Route>
     <Route path='/movies/:id' element={<Detailed/>}></Route>
     <Route path='/cast/:id' element={<Cast/>}></Route>
-    <Route path='/user/' element={<HandleUser/>}></Route>
+    <Route path='/user' element={<HandleUser/>}></Route>
     </Routes>
 
 
