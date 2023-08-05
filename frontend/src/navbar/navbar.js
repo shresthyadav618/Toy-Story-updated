@@ -1,9 +1,9 @@
 
-import "./navbar.css";
-
 import { faBell, faHeart, faLightbulb, faMagnifyingGlass, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import "./navbar.css";
 export default function useNavbar(props){
 
     
@@ -52,12 +52,8 @@ export default function useNavbar(props){
 
 
             <div className="user__heart">
-                <div onClick={()=>{
-                    window.location.href='/user?val=1'
-                }}><FontAwesomeIcon icon={faHeart} size="xl"/></div>
-                <div><FontAwesomeIcon icon={faUser} size="xl" onClick={()=>{
-                    window.location.href = '/user?val=0';
-                }}/></div>
+                <Link to="/user?val=1"><div><FontAwesomeIcon icon={faHeart} size="xl"/></div></Link>
+                <Link to="/user?val=0"><div><FontAwesomeIcon icon={faUser} size="xl" /></div></Link>
             </div>
         </div>
     )
