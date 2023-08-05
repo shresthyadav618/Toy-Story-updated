@@ -63,7 +63,8 @@ export default function useRightContainer(props){
             console.log('the data of the user received ',res);
             changeUserData(res);
         }else{
-            console.log('there was some problem while getting the user data',data.error);
+            const errorData = await data.json();
+            console.log('there was some problem while getting the user data',errorData.error);
         }
         }
         getUserData();
@@ -84,7 +85,8 @@ export default function useRightContainer(props){
                     return res;
                 })
             }else{
-                console.log('there was some error fetching the favorite movie data ',data.error);
+                const errorData = await data.json();
+                console.log('there was some error fetching the favorite movie data ',errorData.error);
             }
         }
 
@@ -106,7 +108,8 @@ export default function useRightContainer(props){
             console.log('got the updated data',res);
             alert('user is updated');
         }else{
-            console.log('there was error updating the data',data.error);
+            const errorData = await data.json();
+            console.log('there was error updating the data',errorData.error);
         }
         }
 
@@ -134,7 +137,8 @@ export default function useRightContainer(props){
                 cpwd : ""
             })
         }else{
-            console.log('there was error updating the pwd',data.error);
+            const errorData = await data.json();
+            console.log('there was error updating the pwd',errorData.error);
         }
         }
 
@@ -158,7 +162,8 @@ export default function useRightContainer(props){
             sessionStorage.clear();
             window.location.href = '';
         }else{
-            console.log('some error while deleting the user',data.error);
+            const errorData = await data.json();
+            console.log('some error while deleting the user',errorData.error);
         }
     }
 

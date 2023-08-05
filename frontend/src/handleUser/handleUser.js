@@ -35,8 +35,9 @@ if(data.ok){
     sessionStorage.setItem('jwt',res.token);
     changeRender((prev)=>{return !prev});
 }else{
+  const errorData = await data.json();
     setError('Invalid email and password');
-    console.log('there was some error while loggin in the user',data.error);
+    console.log('there was some error while loggin in the user',errorData.error);
 }
 
 }
@@ -58,8 +59,9 @@ function signUpUser(e){
             const res = await data.json();
             console.log('user is registered with info ',res);
         }else{
+          const errorData = await data.json();
             setError('Please fill all the fields')
-            console.log('there was some error while registering the user ',data.error);
+            console.log('there was some error while registering the user ',errorData.error);
         }
     }
 

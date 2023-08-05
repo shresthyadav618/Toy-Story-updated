@@ -40,6 +40,9 @@ const loginUser = (req,res)=>{
         }else{
             res.status(404).json({error : 'No such user exists !!'})
         }
+    }).catch((err)=>{
+      console.log('somer error finding the user');
+      res.status(404).json(err);
     })
     // to compare the passwords 
 

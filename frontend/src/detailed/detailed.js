@@ -45,7 +45,8 @@ export default function useDetailed(){
                 console.log('movie exists in the fav movie database',res);
             }else{
                  changeCheckFav(false);
-                console.log('the movie doesnt exist in movie fav database ',data.error);
+                 const errorData = await data.json();
+                console.log('the movie doesnt exist in movie fav database ',errorData.error);
             }
     
             }
@@ -113,7 +114,8 @@ export default function useDetailed(){
             console.log('movie exists in the fav movie database',res);
         }else{
              addMovie();
-            console.log('the movie doesnt exist in movie fav database ',data.error);
+             const errorData = await data.json();
+            console.log('the movie doesnt exist in movie fav database ',errorData.error);
         }
 
         }
@@ -133,7 +135,8 @@ export default function useDetailed(){
                 console.log('the movie is added to the database',res);
                 changeCheckFav(true);
             }else{
-                console.log('some error adding the movie ot favorites',data.error);
+                const errorData = await data.json();
+                console.log('some error adding the movie ot favorites',errorData.error);
             }
         }
         // checkforFav();
@@ -155,7 +158,8 @@ export default function useDetailed(){
             console.log('success deleting the movie from database',res);
             changeCheckFav(false);
         }else{
-            console.log('there was some error deleting the movie',data.error);
+            const errorData = await data.json();
+            console.log('there was some error deleting the movie',errorData.error);
         }
     }
 
