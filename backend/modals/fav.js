@@ -7,7 +7,8 @@ const favSchema = mongoose.Schema({
         type : String,
         required : true
     },
-    userId : {
+    token : {
+        //changing userId to token
         type : String,
         required: true
     }

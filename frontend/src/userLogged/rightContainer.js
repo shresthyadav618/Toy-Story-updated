@@ -47,8 +47,10 @@ export default function useRightContainer(props){
     useEffect(()=>{
         
         async function getUserData(){
-          const data = await fetch('http://localhost:8000/def/user',{
-            method : 'GET'
+          const data = await fetch('http://localhost:8000/def/userbyid',{
+            method : 'POST',
+            body : JSON.stringify({token : sessionStorage.getItem('jwt')}),
+            headers : {'Content-Type' : 'application/json'}
         });
 
         if(data.ok){
@@ -63,8 +65,10 @@ export default function useRightContainer(props){
 
 
         async function getFavMovie(){
-            const data = await fetch('http://localhost:8000/def/fav',{
-                method : 'GET'
+            const data = await fetch('http://localhost:8000/def/favbyid',{
+                method : 'POST',
+                body : JSON.stringify({token : sessionStorage.getItem('jwt')}),
+                headers : {'Content-Type' : 'application/json'}
             });
 
             if(data.ok){
@@ -86,7 +90,7 @@ export default function useRightContainer(props){
         async function updateUser(){
           const data = await fetch('http://localhost:8000/def/user',{
             method : 'PUT',
-            body : JSON.stringify(userData),
+            body : JSON.stringify({...userData,token:sessionStorage.getItem('jwt')}),
             headers : {'Content-Type':'application/json'}
         });
 
@@ -109,7 +113,7 @@ export default function useRightContainer(props){
             headers : {
                 'Content-Type' : 'application/json'
             },
-            body : JSON.stringify(pass)
+            body : JSON.stringify({...pass,token:sessionStorage.getItem('jwt')})
         });
 
         if(data.ok){
@@ -168,7 +172,9 @@ export default function useRightContainer(props){
         transition={{ type: 'spring', damping: 10, stiffness: 100 }} // Spring-like effect 
         >
                 <div className="text-xl">Favorite Movies</div>
-                {favMovieData && <div></div>}
+                {favMovieData && <div>
+                    
+                    </div>}
                 {!favMovieData && <div className="flex flex-col justify-center items-center fmovie"><icon><FontAwesomeIcon icon={faVideo} size="xl" /></icon><div>You have no favorite movies </div></div> }
                 </motion.div>}
 
