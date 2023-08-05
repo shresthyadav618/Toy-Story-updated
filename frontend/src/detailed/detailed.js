@@ -25,12 +25,13 @@ export default function useDetailed(){
     const {id} = useParams();
     console.log(id);
     const API_KEY = '?api_key=6973771bf60a7b1add0cc2ef3779046c';
+    const BASE_URL = 'https://toystory-backend.onrender.com';
 
 
     useEffect(()=>{
         async function checkforFavU(){
             console.log('the movieId is : ',id);
-              const data = await fetch('http://localhost:8000/def/fav/check',{
+              const data = await fetch(`${BASE_URL}/def/fav/check`,{
                 method : 'POST',
                 headers : {
                     'Content-Type' : 'application/json'
@@ -98,7 +99,7 @@ export default function useDetailed(){
     // useEffect(()=>{
         async function checkforFav(){
         console.log('the movieId is : ',id);
-          const data = await fetch('http://localhost:8000/def/fav/check',{
+          const data = await fetch(`${BASE_URL}/def/fav/check`,{
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json'
@@ -119,7 +120,7 @@ export default function useDetailed(){
 
 
         async function addMovie(){
-            const data = await fetch('http://localhost:8000/def/fav/addmovie',{
+            const data = await fetch(`${BASE_URL}/def/fav/addmovie`,{
                 method : 'POST',
                 headers : {
                     'Content-Type' : 'application/json'
@@ -143,7 +144,7 @@ export default function useDetailed(){
     var imgPath = null;
     
     async function deleteFromFav(){
-        const data = await fetch('http://localhost:8000/def/fav/delete',{
+        const data = await fetch(`${BASE_URL}/def/fav/delete`,{
             method : 'POST',
             headers : {'Content-Type' : 'application/json'},
             body : JSON.stringify({movieId:id, token : sessionStorage.getItem('jwt')})

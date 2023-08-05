@@ -5,7 +5,7 @@ import Loggeduser from "../userLogged/loggedUser";
 import "./handleUser.css";
 const HandleUser = () => {
   const [view, setView] = useState('login'); // Initial view is 'login'
-
+  const BASE_URL = 'https://toystory-backend.onrender.com';
 const [error,setError] = useState(null);
   const [sign,changeSign] = useState({
     name : "",
@@ -23,7 +23,7 @@ e.preventDefault();
 
 async function loginFnc(){
 
-const data = await fetch('http://localhost:8000/def/login',{
+const data = await fetch(`${BASE_URL}/def/login`,{
   method : 'POST',
   body : JSON.stringify(login),
   headers : {'Content-Type':'application/json'}  
@@ -48,7 +48,7 @@ loginFnc();
 function signUpUser(e){
     e.preventDefault();
     async function suar(){
-        const data = await fetch('http://localhost:8000/def/signup',{
+        const data = await fetch(`${BASE_URL}/def/signup`,{
             method  : 'POST',
             headers : {'Content-Type' : 'application/json'},
             body : JSON.stringify(sign)

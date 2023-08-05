@@ -10,6 +10,7 @@ export default function useRightContainer(props){
     const API_KEY = '?api_key=6973771bf60a7b1add0cc2ef3779046c';
     const [userData,changeUserData] = useState(null);
     const [favMovieData,changeFavMovie] = useState(null);
+    const BASE_URL = 'https://toystory-backend.onrender.com';
     const [pass,changePass] = useState({
         prev_pwd : "",
         password : "",
@@ -51,7 +52,7 @@ export default function useRightContainer(props){
     useEffect(()=>{
         
         async function getUserData(){
-          const data = await fetch('http://localhost:8000/def/userbyid',{
+          const data = await fetch(`${BASE_URL}/def/userbyid`,{
             method : 'POST',
             body : JSON.stringify({token : sessionStorage.getItem('jwt')}),
             headers : {'Content-Type' : 'application/json'}
@@ -69,7 +70,7 @@ export default function useRightContainer(props){
 
 
         async function getFavMovie(){
-            const data = await fetch('http://localhost:8000/def/favbyid',{
+            const data = await fetch(`${BASE_URL}/def/favbyid`,{
                 method : 'POST',
                 body : JSON.stringify({token : sessionStorage.getItem('jwt')}),
                 headers : {'Content-Type' : 'application/json'}
@@ -94,7 +95,7 @@ export default function useRightContainer(props){
         e.preventDefault();
         console.log('the user is trying to update the user information ');
         async function updateUser(){
-          const data = await fetch('http://localhost:8000/def/user',{
+          const data = await fetch(`${BASE_URL}/def/user`,{
             method : 'PUT',
             body : JSON.stringify({...userData,token:sessionStorage.getItem('jwt')}),
             headers : {'Content-Type':'application/json'}
@@ -115,7 +116,7 @@ export default function useRightContainer(props){
     function handlePassChange(e){
         e.preventDefault();
         async function handlePass(){
-           const data = await fetch('http://localhost:8000/def/user/pwd',{
+           const data = await fetch(`${BASE_URL}/def/user/pwd`,{
             method : 'PUT',
             headers : {
                 'Content-Type' : 'application/json'
@@ -144,7 +145,7 @@ export default function useRightContainer(props){
    async function handleDeleteAcc(e){
     e.preventDefault();
         console.log('delete request');
-        const data = await fetch('http://localhost:8000/def/user/delete',{
+        const data = await fetch(`${BASE_URL}/def/user/delete`,{
             method : 'POST',
             headers : {'Content-Type':'application/json'},
             body : JSON.stringify({token : sessionStorage.getItem('jwt')})

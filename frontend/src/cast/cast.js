@@ -11,7 +11,7 @@ export default function useCast(){
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const prevParam = queryParams.get('prev');
-  
+ 
     // Now you can use the `prevParam` variable in your component
     // For example, you can log it to the console:
     console.log('prev:', prevParam);
