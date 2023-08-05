@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const favSchema = mongoose.Schema({
     movieId : {
-        type : String,
+        type : Number,
         required : true
     },
     userId : {

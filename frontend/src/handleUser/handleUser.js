@@ -6,7 +6,7 @@ import "./handleUser.css";
 const HandleUser = () => {
   const [view, setView] = useState('login'); // Initial view is 'login'
 
-
+const [error,setError] = useState(null);
   const [sign,changeSign] = useState({
     name : "",
     email : "",
@@ -35,6 +35,7 @@ if(data.ok){
     sessionStorage.setItem('jwt',res.token);
     changeRender((prev)=>{return !prev});
 }else{
+    setError('Invalid email and password');
     console.log('there was some error while loggin in the user',data.error);
 }
 
@@ -57,6 +58,7 @@ function signUpUser(e){
             const res = await data.json();
             console.log('user is registered with info ',res);
         }else{
+            setError('Please fill all the fields')
             console.log('there was some error while registering the user ',data.error);
         }
     }
@@ -137,6 +139,7 @@ else{
               <div className="signup-link">
                 Not a member? <a href="#" onClick={handleSignupLinkClick}>Signup now</a>
               </div>
+              <div className='text-red-500 text-center'>{error}</div>
             </form>
           )}
 
@@ -169,8 +172,7 @@ else{
                 <input type="submit" value="Signup" />
               </div>
 
-
-
+              <div className='text-red-500 text-center'>{error}</div>
             </form>
           )}
         </div>

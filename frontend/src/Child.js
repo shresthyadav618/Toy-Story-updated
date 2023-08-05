@@ -5,14 +5,17 @@ import "./index.css";
 export default function useFetchh(props) {
   console.log(props);
   const [arr, change] = React.useState([]);
-
+console.log(props.Check);
+// return;
   const [cpn, changecpn] = useState(1);
 
   console.log(cpn);
   console.log(props.GetUrl + (props.Check == true ? `-US&page=${cpn}` : ``));
   useEffect(() => {
     console.log("enter");
-
+    if(props.search){
+      return
+    }
     fetch(props.GetUrl + (props.Check == true ? `-US&page=${cpn}` : ``))
       .then((res) => res.json())
       .then((data) => {
@@ -20,6 +23,12 @@ export default function useFetchh(props) {
         change(data.results);
       });
   }, [props.GetUrl, cpn]);
+
+useEffect(()=>{
+  if(props.search){
+    fetch(props.GetUrl).then((res)=>res.json()).then((data)=>{console.log('data is : ',data); change([data])});
+  }
+},[])
 
   console.log(arr);
 
@@ -35,7 +44,6 @@ export default function useFetchh(props) {
           MovieDesc={elm.overview}
           Adult={elm.adult}
           Lang={elm.original_language}
-          Gcc={props.Gcc}
         />
       </div>
     );
@@ -45,7 +53,7 @@ export default function useFetchh(props) {
     <div className="container1">
       <div className="flex flex-wrap op">{xx}</div>
 
-      <div className="m-auto flex newdiv">
+     {!props.search &&  <div className="m-auto flex newdiv">
         <button
           onClick={() => {
             changecpn((prev) => prev - 1);
@@ -63,7 +71,7 @@ export default function useFetchh(props) {
         >
           <i class="fa-sharp fa-solid fa-forward fa-2xl"></i>
         </button>
-      </div>
+      </div>}
     </div>
   );
 }

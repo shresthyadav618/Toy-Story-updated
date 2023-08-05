@@ -25,6 +25,33 @@ export default function useDetailed(){
     const {id} = useParams();
     console.log(id);
     const API_KEY = '?api_key=6973771bf60a7b1add0cc2ef3779046c';
+
+
+    useEffect(()=>{
+        async function checkforFavU(){
+            console.log('the movieId is : ',id);
+              const data = await fetch('http://localhost:8000/def/fav/check',{
+                method : 'POST',
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify({movieId : id , token : sessionStorage.getItem('jwt')})
+            });
+    
+            if(data.ok){
+                const res = await data.json();
+                changeCheckFav(true);
+                console.log('movie exists in the fav movie database',res);
+            }else{
+                 changeCheckFav(false);
+                console.log('the movie doesnt exist in movie fav database ',data.error);
+            }
+    
+            }
+
+            checkforFavU();
+    },[])
+
     useEffect(()=>{
         async function getData(){
             
@@ -68,15 +95,15 @@ export default function useDetailed(){
         console.log('changes in this');
     },[id]);
 
-    useEffect(()=>{
+    // useEffect(()=>{
         async function checkforFav(){
-        
+        console.log('the movieId is : ',id);
           const data = await fetch('http://localhost:8000/def/fav/check',{
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json'
             },
-            body : JSON.stringify({'movie_id' : id , token : sessionStorage.getItem('jwt')})
+            body : JSON.stringify({movieId : id , token : sessionStorage.getItem('jwt')})
         });
 
         if(data.ok){
@@ -97,7 +124,7 @@ export default function useDetailed(){
                 headers : {
                     'Content-Type' : 'application/json'
                 },
-                body : JSON.stringify({'movie_id' : id, token : sessionStorage.getItem('jwt')})
+                body : JSON.stringify({movieId : id, token : sessionStorage.getItem('jwt')})
             });
 
             if(data.ok){
@@ -108,8 +135,8 @@ export default function useDetailed(){
                 console.log('some error adding the movie ot favorites',data.error);
             }
         }
-        checkforFav();
-    },[favid])
+        // checkforFav();
+    // },[favid])
     if(detail && cast && rec && loader){
         setLoader(false);
     }
@@ -119,7 +146,7 @@ export default function useDetailed(){
         const data = await fetch('http://localhost:8000/def/fav/delete',{
             method : 'POST',
             headers : {'Content-Type' : 'application/json'},
-            body : JSON.stringify({'movie_id':id, token : sessionStorage.getItem('jwt')})
+            body : JSON.stringify({movieId:id, token : sessionStorage.getItem('jwt')})
         });
 
         if(data.ok){
@@ -235,7 +262,8 @@ export default function useDetailed(){
                                 <div className='second__link'>
                                     { !checkFav && 
                                 <div className='btn1' onClick={()=>{
-                                    changeFavId(id);
+                                    // changeFavId(id);
+                                    checkforFav();
                                 }}>
                                         <span>FAVORITE</span>
                                         <FontAwesomeIcon icon={faHeart} />

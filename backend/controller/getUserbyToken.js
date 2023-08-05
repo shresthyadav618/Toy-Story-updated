@@ -9,7 +9,7 @@ const getuserByToken = (req,res)=>{
     console.log('inside the get all users request');
     
     userModal.findById(decoded._id).then((result)=>{
-        console.log('got the user with details ',result);
+        // console.log('got the user with details ',result);
         res.status(200).json(result);
     }).catch((err)=>{
         console.log('there was some error getting the user information ');

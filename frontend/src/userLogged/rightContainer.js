@@ -2,11 +2,12 @@ import { faFileCirclePlus, faVideo } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
+import Child from "../Child"
 import Def from "../assets/def.png"
 import Loader from "../loader/loader"
 import "./loggedUser.css"
 export default function useRightContainer(props){
-
+    const API_KEY = '?api_key=6973771bf60a7b1add0cc2ef3779046c';
     const [userData,changeUserData] = useState(null);
     const [favMovieData,changeFavMovie] = useState(null);
     const [pass,changePass] = useState({
@@ -75,7 +76,9 @@ export default function useRightContainer(props){
             });
 
             if(data.ok){
+                console.log('data found');
                 const res = await data.json();
+                console.log('data is : ',res);
                 changeFavMovie((prev)=>{
                     return res;
                 })
@@ -100,6 +103,7 @@ export default function useRightContainer(props){
         if(data.ok){
             const res = await data.json();
             console.log('got the updated data',res);
+            alert('user is updated');
         }else{
             console.log('there was error updating the data',data.error);
         }
@@ -122,6 +126,12 @@ export default function useRightContainer(props){
         if(data.ok){
             const res = await data.json();
             console.log('the user password is updated ',res);
+            alert('updated the password');
+            changePass({
+                prev_pwd: "",
+                password : "",
+                cpwd : ""
+            })
         }else{
             console.log('there was error updating the pwd',data.error);
         }
@@ -130,8 +140,30 @@ export default function useRightContainer(props){
         handlePass();
     }
 
-    if(!userData || !favMovieData){
-        return <Loader/>
+
+   async function handleDeleteAcc(e){
+    e.preventDefault();
+        console.log('delete request');
+        const data = await fetch('http://localhost:8000/def/user/delete',{
+            method : 'POST',
+            headers : {'Content-Type':'application/json'},
+            body : JSON.stringify({token : sessionStorage.getItem('jwt')})
+        });
+
+        if(data.ok){
+            console.log('deleted the user');
+            const res = await data.json();
+            console.log('deleted the user with response',res);
+            sessionStorage.clear();
+            window.location.href = '';
+        }else{
+            console.log('some error while deleting the user',data.error);
+        }
+    }
+
+
+    if(!userData || !favMovieData ){
+        return  <div className="child__container"><Loader/></div> 
     }else{
     return(
         <div className="text-xl" 
@@ -140,7 +172,7 @@ export default function useRightContainer(props){
         animate={{ y: 0 }} // Final position (attached to its right place)
         transition={{ type: 'spring', damping: 10, stiffness: 100 }} // Spring-like effect
 >
-            <form onSubmit={(e)=>{handleUserSubmit(e)}}>
+            <form >
                 <h2 className="mb-4"> Profile</h2>
                 <div className="flex large">
                     <input type="file" onChange={(e)=>{
@@ -167,8 +199,10 @@ export default function useRightContainer(props){
                 </div>
 
                 <div className="flex justify-between btnclass">
-                    <button className="bt1">Delete Account</button>
-                    <button className="bt2">Update Profile</button>
+                    <button className="bt1" onClick={(e)=>{
+                        handleDeleteAcc(e);
+                    }}>Delete Account</button>
+                    <button className="bt2" type="submit" onClick={(e)=>{handleUserSubmit(e)}}>Update Profile</button>
                 </div>
             </form>
             </motion.div>}
@@ -178,9 +212,16 @@ export default function useRightContainer(props){
         transition={{ type: 'spring', damping: 10, stiffness: 100 }} // Spring-like effect 
         >
                 <div className="text-xl">Favorite Movies</div>
-                {favMovieData && <div>
-                    
-                    </div>}
+                <div className="flex flex-wrap fn">
+                {favMovieData && favMovieData.map((elm)=>{
+                    console.log(elm.movieId);
+                    return  <Child
+                    GetUrl={`https://api.themoviedb.org/3/movie/${elm.movieId}${API_KEY}`}
+                    Check={false}
+                    search={true}
+                  />
+                })}
+                </div>
                 {!favMovieData && <div className="flex flex-col justify-center items-center fmovie"><icon><FontAwesomeIcon icon={faVideo} size="xl" /></icon><div>You have no favorite movies </div></div> }
                 </motion.div>}
 
@@ -202,21 +243,21 @@ export default function useRightContainer(props){
                 
                 <div className="flex flex-col">
                     <label htmlFor="ppwd">Previous Password</label>
-                    <input placeholder="********" name="ppwd" onChange={(e)=>{
+                    <input placeholder="********" name="ppwd" value={pass.prev_pwd} onChange={(e)=>{
                         changePass((prev)=>{return {...prev,prev_pwd : e.target.value}})
                     }}></input>
                 </div>
 
                 <div className="flex flex-col">
                     <label htmlFor="npwd">New Password</label>
-                    <input placeholder="********" name="npwd" onChange={(e)=>{
+                    <input placeholder="********" name="npwd" value={pass.password} onChange={(e)=>{
                         changePass((prev)=>{return {...prev,password : e.target.value}})
                     }}></input>
                 </div>
 
                 <div className="flex flex-col">
                     <label htmlFor="fpwd">Confirm Password</label>
-                    <input placeholder="********" name="fpwd" onChange={(e)=>{
+                    <input placeholder="********" name="fpwd" value={pass.cpwd} onChange={(e)=>{
                         changePass((prev)=>{return {...prev,cpwd : e.target.value}})
                     }}></input>
                 </div>
@@ -235,3 +276,8 @@ export default function useRightContainer(props){
 
 
 }
+
+
+// elm.map((el)=>{
+   
+// })

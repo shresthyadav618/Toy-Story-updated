@@ -36,6 +36,14 @@
    background-color: #293241;
 }
 
+.fn > div{
+    width: 30%;
+    margin: auto;
+}
+.fn{
+    column-gap: 20px;
+}
+
 .child__container > form > div{
 margin-bottom: 40px;
 row-gap: 5px;
@@ -108,6 +116,12 @@ input[type="file"] {
 .change__image > div{
     align-items: center;
 }
+
+.child__container > .main__loader{
+    width: 100%;
+}
+
+
   @media screen and (max-width:1280px){
     .lr__parent{
         flex-direction: column;

@@ -12,15 +12,13 @@ const decoded = jwt.verify(token,jwt_secret);
 const userId = decoded._id;
 favModal.findOne({userId,movieId}).then((result)=>{
     if(result){
-        favModal.deleteOne({ _id: result._id }, (err) => {
-            if (err) {
-              console.error('Error deleting the document:', err);
-              res.status(404).json({error : 'error deleting the movie'});
-            } else {
-              console.log('Document deleted successfully.');
-              res.status(200).json('deleted the movie successfully');
-            }
-          });
+        favModal.deleteOne({userId,movieId}).then((result)=>{
+            console.log('movie is deleted',result);
+            res.status(200).json(result);
+        }).catch((err)=>{
+            console.log('there was some error deleting the movie',err);
+            res.status(404).json({error : err});
+        })
         } else {
           console.log('Document not found.');
         res.status(404).json('no such movie found')
