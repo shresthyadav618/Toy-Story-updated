@@ -1,10 +1,9 @@
 
-import { collection, deleteDoc, doc } from "firebase/firestore"
 import React, { useEffect, useState } from "react"
 import ParPota from "./ParPota"
 import Star from "./Star"
 import a2f from "./assets/a2f.jpeg"
-import firestore from "./firestore"
+// import firestore from "./firestore"
 import "./index.css"
 
 export default function useGranchild(props){
@@ -44,19 +43,19 @@ const handleChange=()=>{
     changeopen(!open)
 }
 
-const colref=collection(firestore, 'movies');
+// const colref=collection(firestore, 'movies');
 
-function handlermvfav(e){
-  console.log(e.target.id)
+// function handlermvfav(e){
+//   console.log(e.target.id)
  
- const colref = collection (firestore, 'movies')
+//  const colref = collection (firestore, 'movies')
 
-const dcid=`'${props.docid}'`
-const docref= doc(colref, 'movies' , dcid)
-deleteDoc(docref)
+// const dcid=`'${props.docid}'`
+// const docref= doc(colref, 'movies' , dcid)
+// deleteDoc(docref)
 
-props.Gcc()
-}
+// props.Gcc()
+// }
 
 
  return (<>

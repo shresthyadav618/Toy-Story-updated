@@ -1,15 +1,13 @@
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Routes, useNavigate, useParams } from "react-router-dom";
 import Child from "./Child";
 import logo from "./assets/movielogo.jpeg";
-import firestore from "./firestore";
+// import firestore from "./firestore";
 import "./index.css";
 import Links from "./links";
 import Navbar from "./navbar/navbar";
 export default function useSider(props) {
   const API_KEY = '?api_key=6973771bf60a7b1add0cc2ef3779046c';
-  const colref=collection(firestore,'movies')
 
 const [gci,gcc]=useState(false)  // gcc -> grand child change , gci -> grand child initial
 const [genres, getGenres] = useState(null);
@@ -49,25 +47,9 @@ function maingcc(){
 }
 
 
-  const [favs,changefav]=useState([])
-useEffect(()=>{
-let arr=[];
-getDocs(colref).then((snap)=>{
-  snap.docs.forEach((doc)=>{
-arr.push({movieid:doc.data().movieid, docid: doc.id });    
-// console.log(doc.data())
-  })
-})
-changefav(arr);
-},[gci])
+ 
 
-onSnapshot(colref,((snap)=>{
-  let arr=[];
-  snap.docs.forEach((doc)=>{
-    arr.push(<div>{doc.data().moviedata}</div>)
-  });
-  // changefav(arr)
-}))
+
 
 
 // ho kya rha hai yhpar -> add2fav kra fir vo kya krega hmari firebase docs mai add kreaga data , par uske changes dejhne k liye 
@@ -224,7 +206,7 @@ if(query){
     <Child
       GetUrl={urlUsed === null ? Links.popular : urlUsed.url}
       Check={urlUsed === null ? true : urlUsed.check}
-      Gcc={maingcc}
+     
     />
   </div> : ''}
 

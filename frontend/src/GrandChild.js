@@ -1,10 +1,9 @@
 
-import { addDoc, collection } from "firebase/firestore"
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import ParPota from "./ParPota"
 import Star from "./Star"
-import firestore from "./firestore"
+// import firestore from "./firestore"
 import "./index.css"
 
 export default function useGranchild(props){
@@ -20,16 +19,16 @@ const handleChange=()=>{
     changeopen(!open)
 }
 
-const colref=collection(firestore, 'movies');
+// const colref=collection(firestore, 'movies');
 
-function handleaddfav(e){
-  console.log(e.target.id)
-addDoc(colref, {
-  movieid: e.target.id
-})
+// function handleaddfav(e){
+//   console.log(e.target.id)
+// addDoc(colref, {
+//   movieid: e.target.id
+// })
 
-props.Gcc()
-}
+// props.Gcc()
+// }
 
 const string = props.path_diff && true ? '/movies/' : '/movie/';
 
