@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import Def from "../assets/def.png"
+import Loader from "../loader/loader"
 import "./loggedUser.css"
 export default function useRightContainer(props){
 
@@ -13,6 +14,8 @@ export default function useRightContainer(props){
         password : "",
         cpwd : ""
     });
+    console.log('user data is  : ',userData);
+    console.log('movie data is : ',favMovieData);
     const [error,setError] = useState(null);
     async function convertToString(file) {
         return new Promise((resolve, reject) => {
@@ -127,6 +130,9 @@ export default function useRightContainer(props){
         handlePass();
     }
 
+    if(!userData || !favMovieData){
+        return <Loader/>
+    }else{
     return(
         <div className="text-xl" 
    >
@@ -145,7 +151,7 @@ export default function useRightContainer(props){
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor="fullname">FullName</label>
-                    <input placeholder="Toy Story MERN" name="fullname" onChange={(e)=>{
+                    <input placeholder="Toy Story MERN" name="fullname" value={userData.name} onChange={(e)=>{
                         changeUserData((prev)=>{
                             return {...prev,name : e.target.value}
                         })
@@ -153,7 +159,7 @@ export default function useRightContainer(props){
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor="email">Email</label>
-                    <input placeholder="toystory@gmail.com" name="email"  onChange={(e)=>{
+                    <input placeholder="toystory@gmail.com" name="email" value={userData.email}  onChange={(e)=>{
                         changeUserData((prev)=>{
                             return {...prev,email : e.target.value}
                         })
@@ -228,5 +234,4 @@ export default function useRightContainer(props){
 
 
 
-
-
+}

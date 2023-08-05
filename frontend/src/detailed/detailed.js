@@ -76,7 +76,7 @@ export default function useDetailed(){
             headers : {
                 'Content-Type' : 'application/json'
             },
-            body : JSON.stringify({'movie_id' : id})
+            body : JSON.stringify({'movie_id' : id , token : sessionStorage.getItem('jwt')})
         });
 
         if(data.ok){
@@ -92,12 +92,12 @@ export default function useDetailed(){
 
 
         async function addMovie(){
-            const data = await fetch('http://localhost:8000/def/fav',{
+            const data = await fetch('http://localhost:8000/def/fav/addmovie',{
                 method : 'POST',
                 headers : {
                     'Content-Type' : 'application/json'
                 },
-                body : JSON.stringify({'movie_id' : id})
+                body : JSON.stringify({'movie_id' : id, token : sessionStorage.getItem('jwt')})
             });
 
             if(data.ok){
@@ -119,7 +119,7 @@ export default function useDetailed(){
         const data = await fetch('http://localhost:8000/def/fav/delete',{
             method : 'POST',
             headers : {'Content-Type' : 'application/json'},
-            body : JSON.stringify({'movie_id':id})
+            body : JSON.stringify({'movie_id':id, token : sessionStorage.getItem('jwt')})
         });
 
         if(data.ok){

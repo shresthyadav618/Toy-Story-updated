@@ -2,11 +2,13 @@
 
 
 const favModal = require('../modals/fav');
-
+const jwt = require('jsonwebtoken');
+const jwt_secret = process.env.SECRET;
 const addFav = (req,res)=>{
 
-const {movieId , userId} = req.body;
-
+const {movieId , token} = req.body;
+const decoded = jwt.verify(token,jwt_secret);
+const userId = decoded._id;
 favModal.findOne({userId,movieId}).then((result)=>{
     if(result){
         res.status(404).json({error : 'Movie already exists'});
