@@ -216,7 +216,7 @@ body {
 }
 @media screen and (max-width : 750px){
   .ninty{
-    width: 90%;
+    width: 90%!important;
   }
   .container1{
     margin-left: 30%;
