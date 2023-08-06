@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import ParPota from "./ParPota"
 import Star from "./Star"
+import Def from "./assets/default.png"
 // import firestore from "./firestore"
 import "./index.css"
 
@@ -31,15 +32,16 @@ const handleChange=()=>{
 // }
 
 const string = props.path_diff && true ? '/movies/' : '/movie/';
-
+console.log(props.imgUrl);
+const ImageURL = props.imgUrl? `https://www.themoviedb.org/t/p/w440_and_h660_face` +
+props.imgUrl : Def;
  return (<>
  <Link to={`${string}`+props.MovieId}>
  <div >
     <div className="con flex flex-col " >
             <div className=""><img
               src={
-                `https://www.themoviedb.org/t/p/w440_and_h660_face` +
-                props.imgUrl
+               ImageURL
               } width="200px" 
             ></img>
            

@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import GrandChild from "../GrandChild";
 import Star from "../Star";
+import Def from "../assets/default.png";
+import Defcast from "../assets/default_cast.jpeg";
 import Loader from "../loader/loader";
 import Navbar from "../navbar/navbar";
 import Sider from "../sider";
@@ -162,7 +164,7 @@ export default function useDetailed(){
             console.log('there was some error deleting the movie',errorData.error);
         }
     }
-
+const mainPic = (detail && detail.profile_path) ? `https://image.tmdb.org/t/p/w500${detail.poster_path}` : Def;
    if(loader){
     return <Loader/>;
    }else{
@@ -183,7 +185,7 @@ export default function useDetailed(){
           
             <div className="khali"></div>
                 <div className="flex gap-x-10 mt-6 mlf">
-                <div className='first__main'><img src={`https://image.tmdb.org/t/p/w500${detail.poster_path}`} alt={()=>{
+                <div className='first__main'><img src={mainPic} alt={()=>{
                     setLoader(true);
                 }}></img></div>
                 <div className='second__main'>
@@ -205,6 +207,7 @@ export default function useDetailed(){
                             <div className='movie__genres'>
                                 {detail.genres.map((elm)=>{
                                     const pathImg = require(`../assets/${elm.id}.png`);
+                                    
                                     return(
                                     <>
                                     <div className="flex gap-x-2 justify-center items-center">
@@ -225,12 +228,13 @@ export default function useDetailed(){
                                 {cast.map((elm,index)=>{
                                     if(index<=5){
                                     console.log(`https://image.tmdb.org/t/p/w500/${elm.profile_path}.jpg?api_key=6973771bf60a7b1add0cc2ef3779046c`);
+                                    const mainCast = (elm.profile_path)?`https://image.tmdb.org/t/p/w500/${elm.profile_path}?api_key=6973771bf60a7b1add0cc2ef3779046c`:Defcast
                                     return(
                                         
                                         <div onClick={()=>{
                                             Navigate(`/cast/${elm.id}?prev=${`/movie/${id}`}`)
                                         }} className='cast__card' >
-                                            <img src={`https://image.tmdb.org/t/p/w500/${elm.profile_path}?api_key=6973771bf60a7b1add0cc2ef3779046c`} width={'100px'} height={'100px'}></img>
+                                            <img src={mainCast} width={'100px'} height={'100px'}></img>
                                             <div className='cast__name'>{elm.original_name}</div>
                                             <div className='cast__role'>{elm.character.split('/')[0]}</div>
                                         </div>
