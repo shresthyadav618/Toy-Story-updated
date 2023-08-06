@@ -271,7 +271,11 @@ align-items: center;
  }
  
 }
-
+@media screen and (max-width : 580px){
+    .rating__date{
+        flex-direction: column;
+    }
+}
 @media screen and (max-width:550px){
     .first__link{
         flex-wrap: wrap;
