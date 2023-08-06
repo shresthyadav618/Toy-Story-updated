@@ -269,4 +269,24 @@ align-items: center;
  .miracle1{
     width: 0px;
  }
+ 
+}
+
+@media screen and (max-width:550px){
+    .first__link{
+        flex-wrap: wrap;
+     }
+     .second__link{
+        flex-wrap: wrap;
+     }
+     .might{
+        text-align: center;
+     }
+     .title{
+        overflow-x: hidden;
+     }
+}
+
+@media screen and (max-width:380px){
+    .cast__card{width: 43%;}
 }

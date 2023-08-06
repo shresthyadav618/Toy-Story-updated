@@ -234,4 +234,11 @@ body {
     display: none;
   }
 }
-
+@media screen and (max-width : 550px){
+  
+  .ninty > h1{
+    width: 100%;
+  }
+  
+  
+}
