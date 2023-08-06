@@ -164,7 +164,13 @@ export default function useDetailed(){
             console.log('there was some error deleting the movie',errorData.error);
         }
     }
-const mainPic = (detail && detail.profile_path) ? `https://image.tmdb.org/t/p/w500${detail.poster_path}` : Def;
+// const mainPic = (detail && detail.profile_path) ? `https://image.tmdb.org/t/p/w500${detail.poster_path}` : Def;
+var mainPic = (detail)? `https://image.tmdb.org/t/p/w500${detail.poster_path}`:Def ;
+if(detail && detail.poster_path){
+    mainPic = `https://image.tmdb.org/t/p/w500${detail.poster_path}`
+}else{
+    mainPic = Def;
+}
    if(loader){
     return <Loader/>;
    }else{
