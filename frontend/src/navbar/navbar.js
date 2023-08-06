@@ -19,7 +19,7 @@ export default function useNavbar(props){
                         console.log(elm.style.display)
                         elm.style.display='none';}
                         else if(elm.style.display==''){
-                            elm.style.display='none';
+                            elm.style.display='block';
                         }
                         else{
                             console.log(elm.style.display)

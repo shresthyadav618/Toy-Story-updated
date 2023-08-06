@@ -97,7 +97,7 @@ code {
 
 .sider {
   width: 20%;
-  display: block;
+  /* display: block; */
   max-width: 220px;
   border-right: 1px solid white;
   
@@ -231,6 +231,7 @@ body {
   .sider{
     max-width: 400px;
     width: 50%;
+    display: none;
   }
 }
 
